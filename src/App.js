@@ -62,7 +62,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3001/').then(response => response.json()).then(console.log)
+    fetch('https://radiant-dawn-33653.herokuapp.com/').then(response => response.json()).then(console.log)
   }
   
 
@@ -92,7 +92,7 @@ class App extends Component {
      this.state.input)
    .then(response => {
      if (response) {
-       fetch('http://localhost:3001/image', {
+       fetch('https://radiant-dawn-33653.herokuapp.com/image', {
          method: 'put',
          headers: {'Content-Type': 'application/json'},
          body: JSON.stringify({
