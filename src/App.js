@@ -30,24 +30,25 @@ const app = new Clarifai.App({
  apiKey: 'b1f8c3151c20417ca2ab904991b4e3e4'
 });
 
+const initialState = {
+    input: '',
+    imageUrl: '',
+    route: 'signin',
+    userSignedIn: false,
+    userClickedDetect: false,
+    user: {
+      id: '',
+      name: '',
+      email: '',
+      entries: 0,
+      joined: ''
+    }
+}
 
 class App extends Component { 
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-      imageUrl: '',
-      route: 'signin',
-      userSignedIn: false,
-      userClickedDetect: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
-    }
+    this.state = initialState;
   }
 
   loadUser = (data) => {
@@ -65,17 +66,17 @@ class App extends Component {
   }
   
 
-  getOutputData = (data) => {
+ getOutputData = (data) => {
       document.getElementById('p1').innerHTML = data.outputs[0].data.concepts.[0].name;
-      document.getElementById('p2').innerHTML = data.outputs[0].data.concepts.[0].value;
+      document.getElementById('p2').innerHTML = data.outputs[0].data.concepts.[0].value*100;
       document.getElementById('p3').innerHTML = data.outputs[0].data.concepts.[1].name;
-      document.getElementById('p4').innerHTML = data.outputs[0].data.concepts.[1].value;
+      document.getElementById('p4').innerHTML = data.outputs[0].data.concepts.[1].value*100;
       document.getElementById('p5').innerHTML = data.outputs[0].data.concepts.[2].name;
-      document.getElementById('p6').innerHTML = data.outputs[0].data.concepts.[2].value;
+      document.getElementById('p6').innerHTML = data.outputs[0].data.concepts.[2].value*100;
       document.getElementById('p7').innerHTML = data.outputs[0].data.concepts.[3].name;
-      document.getElementById('p8').innerHTML = data.outputs[0].data.concepts.[3].value;
+      document.getElementById('p8').innerHTML = data.outputs[0].data.concepts.[3].value*100;
       document.getElementById('p9').innerHTML = data.outputs[0].data.concepts.[4].name;
-      document.getElementById('p10').innerHTML = data.outputs[0].data.concepts.[4].value;
+      document.getElementById('p10').innerHTML = data.outputs[0].data.concepts.[4].value*100;
   }
 
   onInputChange = (event) => {
@@ -102,6 +103,7 @@ class App extends Component {
        .then(count => {
          this.setState(Object.assign(this.state.user, {entries: count}))
        })
+       .catch(console.log)
      }
      this.getOutputData(response)})
    .catch(_err => alert("Our API server is not responding. Please check your internet connection or try again later."));
@@ -109,7 +111,7 @@ class App extends Component {
 
 onChangeRoute = (route) => {
   if(route === 'signout') {
-    this.setState({userSignedIn: false})
+    this.setState(initialState)
   } else if(route === 'home') {
     this.setState({userSignedIn: true})
   }
@@ -122,11 +124,13 @@ onChangeRoute = (route) => {
        <Particles className='particles' params={particlesOptions} />
        <Navigation userSignedIn={this.state.userSignedIn} onChangeRoute={this.onChangeRoute} />
        { this.state.route === 'home'
-       ? <div><Logo />
+       ? <div>
+       <Logo />
        <Rank name={this.state.user.name} entries={this.state.user.entries}/>
        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
        <FaceRecognition imageUrl={this.state.imageUrl} />
-       <Probability userClickedDetect={this.state.userClickedDetect}/></div>
+       <Probability userClickedDetect={this.state.userClickedDetect}/>
+       </div>
        :
        (
          this.state.route === 'signin'

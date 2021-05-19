@@ -10,7 +10,7 @@ const Probability = ({ userClickedDetect }) => {
                     <p>Prediction</p>
                 </div>
                 <div class="table-cell">
-                    <p>Probability</p>
+                    <p>Probability %</p>
                 </div> 
             </div>
     
