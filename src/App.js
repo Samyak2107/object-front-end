@@ -66,17 +66,17 @@ class App extends Component {
   }
   
 
- getOutputData = (data) => {
-      document.getElementById('p1').innerHTML = data.outputs[0].data.concepts.[0].name;
-      document.getElementById('p2').innerHTML = data.outputs[0].data.concepts.[0].value*100;
-      document.getElementById('p3').innerHTML = data.outputs[0].data.concepts.[1].name;
-      document.getElementById('p4').innerHTML = data.outputs[0].data.concepts.[1].value*100;
-      document.getElementById('p5').innerHTML = data.outputs[0].data.concepts.[2].name;
-      document.getElementById('p6').innerHTML = data.outputs[0].data.concepts.[2].value*100;
-      document.getElementById('p7').innerHTML = data.outputs[0].data.concepts.[3].name;
-      document.getElementById('p8').innerHTML = data.outputs[0].data.concepts.[3].value*100;
-      document.getElementById('p9').innerHTML = data.outputs[0].data.concepts.[4].name;
-      document.getElementById('p10').innerHTML = data.outputs[0].data.concepts.[4].value*100;
+ getOutputData(data) {
+      document.getElementById('p1').innerHTML = data.outputs[0].data.concepts[0].name;
+      document.getElementById('p2').innerHTML = data.outputs[0].data.concepts[0].value*100;
+      document.getElementById('p3').innerHTML = data.outputs[0].data.concepts[1].name;
+      document.getElementById('p4').innerHTML = data.outputs[0].data.concepts[1].value*100;
+      document.getElementById('p5').innerHTML = data.outputs[0].data.concepts[2].name;
+      document.getElementById('p6').innerHTML = data.outputs[0].data.concepts[2].value*100;
+      document.getElementById('p7').innerHTML = data.outputs[0].data.concepts[3].name;
+      document.getElementById('p8').innerHTML = data.outputs[0].data.concepts[3].value*100;
+      document.getElementById('p9').innerHTML = data.outputs[0].data.concepts[4].name;
+      document.getElementById('p10').innerHTML = data.outputs[0].data.concepts[4].value*100;
   }
 
   onInputChange = (event) => {
